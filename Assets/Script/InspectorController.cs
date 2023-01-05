@@ -11,6 +11,8 @@ public class InspectorController : MonoBehaviour
     private Animator _animator;
     private static readonly int Walking = Animator.StringToHash("Walking");
 
+    private bool _controlInProcess = false;
+
     // Start is called before the first frame update
     void Start(){
     }
@@ -23,7 +25,10 @@ public class InspectorController : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        if (_controlInProcess) return;
+
         _animator.SetBool(Walking, _navMeshAgent.hasPath);
+
         if (Input.GetMouseButtonDown(1))
         {
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -35,25 +40,44 @@ public class InspectorController : MonoBehaviour
         else if (Input.GetMouseButtonDown(0))
         {
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit))
+            if (!Physics.Raycast(ray, out var hit)) return;
+            if (!hit.transform.CompareTag("Passenger")) return;
+            if (Vector3.Distance(transform.position, hit.point) < 5)
             {
-                if (hit.transform.CompareTag("Passenger") && Vector3.Distance(transform.position, hit.point) < 5)
-                {
-                    var passenger = hit.transform.gameObject;
-                    StartCoroutine(ControlCoroutine(passenger));
-                }
-                else
-                {
-                    _navMeshAgent.SetDestination(hit.point);
-                }
+                var passenger = hit.transform.gameObject;
+                StartCoroutine(ControlCoroutine(passenger));
+            }
+            else
+            {
+                _navMeshAgent.SetDestination(hit.point);
             }
         }
     }
 
     IEnumerator ControlCoroutine(GameObject passenger){
+        _controlInProcess = true;
+        var position = transform.position;
+        _navMeshAgent.SetDestination(position);
+        _animator.SetBool(Walking, false);
+
         var passengerController = passenger.GetComponent<PassengerController>();
-        passengerController.Control(transform.position);
+        passengerController.Control(position);
+        StartCoroutine(LookAt(passenger.transform.position));
         yield return new WaitForSeconds(2f);
+
         passengerController.Release();
+        _controlInProcess = false;
+    }
+
+    IEnumerator LookAt(Vector3 controllerPosition){
+        while (Quaternion.Angle(transform.rotation,
+                   Quaternion.LookRotation((controllerPosition - transform.position))) != 0)
+        {
+            var transform1 = transform;
+            transform.rotation = Quaternion.RotateTowards(transform1.rotation,
+                Quaternion.LookRotation((controllerPosition - transform1.position).normalized),
+                360f * Time.deltaTime);
+            yield return null;
+        }
     }
 }

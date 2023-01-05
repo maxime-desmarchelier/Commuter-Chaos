@@ -51,7 +51,19 @@ public class PassengerController : MonoBehaviour
 
     public void Control(Vector3 controller){
         _navMeshAgent.SetDestination(transform.position);
+        StartCoroutine(LookAt(controller));
         _animator.SetBool(Walking, false);
+    }
+
+    IEnumerator LookAt(Vector3 controllerPosition){
+        while (Quaternion.Angle(transform.rotation,
+                   Quaternion.LookRotation((controllerPosition - transform.position))) != 0)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                Quaternion.LookRotation((controllerPosition - transform.position).normalized),
+                360f * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void Release(){
