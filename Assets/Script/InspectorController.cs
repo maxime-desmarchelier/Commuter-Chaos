@@ -32,5 +32,28 @@ public class InspectorController : MonoBehaviour
                 _navMeshAgent.SetDestination(enter.point);
             }
         }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit))
+            {
+                if (hit.transform.CompareTag("Passenger") && Vector3.Distance(transform.position, hit.point) < 5)
+                {
+                    var passenger = hit.transform.gameObject;
+                    StartCoroutine(ControlCoroutine(passenger));
+                }
+                else
+                {
+                    _navMeshAgent.SetDestination(hit.point);
+                }
+            }
+        }
+    }
+
+    IEnumerator ControlCoroutine(GameObject passenger){
+        var passengerController = passenger.GetComponent<PassengerController>();
+        passengerController.Control(transform.position);
+        yield return new WaitForSeconds(2f);
+        passengerController.Release();
     }
 }

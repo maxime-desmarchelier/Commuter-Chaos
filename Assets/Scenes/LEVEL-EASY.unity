@@ -1181,6 +1181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passenger
       objectReference: {fileID: 0}
+    - target: {fileID: 226528490675681273, guid: 1d8b436cea59943089798d2b7ecf38c0, type: 3}
+      propertyPath: m_TagString
+      value: Passenger
+      objectReference: {fileID: 0}
     - target: {fileID: 607734001822264643, guid: 1d8b436cea59943089798d2b7ecf38c0, type: 3}
       propertyPath: m_RootOrder
       value: 3
