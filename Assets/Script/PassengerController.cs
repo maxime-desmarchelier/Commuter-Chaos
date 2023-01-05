@@ -10,6 +10,7 @@ public class PassengerController : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private static readonly int Walking = Animator.StringToHash("Walking");
+    private static readonly int Badge = Animator.StringToHash("Badge");
 
     // Start is called before the first frame update
     void Start(){
@@ -28,6 +29,14 @@ public class PassengerController : MonoBehaviour
         if (transform.position.z > 18.45f)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other){
+        if (other.CompareTag("Tourniquet"))
+        {
+            Debug.Log("Tourniquet");
+            _animator.SetTrigger(Badge);
         }
     }
 }

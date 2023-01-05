@@ -149,7 +149,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 23428739}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Speed: 3.5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -162,6 +162,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &23428744
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23428739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3695402
+  m_Height: 1.5769691
+  m_Direction: 1
+  m_Center: {x: 0.0028333664, y: 0.6959071, z: 0}
 --- !u!1 &435897846 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1328023254706044480, guid: 257c304c754d3b247a51ef5bea7a90d0, type: 3}
@@ -719,6 +733,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1000075088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6007483973939445514, guid: 5cb197d602bcf4c11b010c68976e277a, type: 3}
+  m_PrefabInstance: {fileID: 6766359869486295000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457598172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1019,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6346995145492358576, guid: 5cb197d602bcf4c11b010c68976e277a, type: 3}
   m_PrefabInstance: {fileID: 6766359869486295000}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &543450653394568283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000075088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73571473, y: 1.1296058, z: 0.64667374}
+  m_Center: {x: 0.0008993149, y: 0.54875875, z: 0.5051415}
+--- !u!54 &543450653394568284
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000075088}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1275161258411208807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1279,6 +1327,10 @@ PrefabInstance:
     - target: {fileID: 6007483973939445514, guid: 5cb197d602bcf4c11b010c68976e277a, type: 3}
       propertyPath: m_Name
       value: tourniquet (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007483973939445514, guid: 5cb197d602bcf4c11b010c68976e277a, type: 3}
+      propertyPath: m_TagString
+      value: Tourniquet
       objectReference: {fileID: 0}
     - target: {fileID: 6346995145492358576, guid: 5cb197d602bcf4c11b010c68976e277a, type: 3}
       propertyPath: m_RootOrder
