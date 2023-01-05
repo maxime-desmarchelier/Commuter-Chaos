@@ -11,6 +11,9 @@ public class PassengerController : MonoBehaviour
     private Animator _animator;
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Badge = Animator.StringToHash("Badge");
+    private static readonly int Jump = Animator.StringToHash("Jump");
+
+    private bool _isFraudster = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -35,8 +38,12 @@ public class PassengerController : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if (other.CompareTag("Tourniquet"))
         {
-            Debug.Log("Tourniquet");
-            _animator.SetTrigger(Badge);
+            _navMeshAgent.speed = 1.5f;
+            _animator.SetTrigger(!_isFraudster ? Badge : Jump);
         }
+    }
+
+    private void OnTriggerExit(Collider other){
+        _navMeshAgent.speed = 3.5f;
     }
 }
