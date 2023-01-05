@@ -527,3 +527,27 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 11826.190320 seconds.
+  path: Assets/Prefab/Stairs.fbx
+  artifactKey: Guid(b279e18ca3c074fc9b867a1b4364da2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Stairs.fbx using Guid(b279e18ca3c074fc9b867a1b4364da2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2afd399943dd03fc46e7200bfa26a0bd') in 0.900237 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2161.238407 seconds.
+  path: Assets/Prefabs/Stairs.fbx
+  artifactKey: Guid(0d743bdb66ba84a2caffc40db1a26801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Stairs.fbx using Guid(0d743bdb66ba84a2caffc40db1a26801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69a606b9feb99e90f8ceea65c73baa03') in 0.016098 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Prefabs/YellowTrain.prefab
+  artifactKey: Guid(00a91f0b359fa4c1a8f9d465a2d76a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/YellowTrain.prefab using Guid(00a91f0b359fa4c1a8f9d465a2d76a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13a412c01302c7d30e754165a3ef4fcc') in 0.052043 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 133.949823 seconds.
+  path: Assets/Prefabs/YellowTrain.prefab
+  artifactKey: Guid(00a91f0b359fa4c1a8f9d465a2d76a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/YellowTrain.prefab using Guid(00a91f0b359fa4c1a8f9d465a2d76a37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18392560b1923dfa78b47e0deda35c8d') in 0.025979 seconds 
