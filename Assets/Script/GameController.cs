@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 
     public int Score { get; set; }
     public string Level { get; set; }
+    
+    public int NbPassengerRemaining { get; set; }
 
     private void Awake(){
         if (Instance != null && Instance != this)

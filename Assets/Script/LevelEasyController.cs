@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelEasyController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class LevelEasyController : MonoBehaviour
     private void Awake(){
         GameController.Instance.Score = 0;
         GameController.Instance.Level = "EASY";
-
+        GameController.Instance.NbPassengerRemaining = 5;
 
         var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, -5.7f), Quaternion.identity);
         train.SetActive(true);
@@ -30,7 +31,6 @@ public class LevelEasyController : MonoBehaviour
         };
 
         trainController.ExitPosition = new Vector3(44f, 1.064f, -5.7f);
-
         _trains.Add(trainController);
     }
 
@@ -50,6 +50,16 @@ public class LevelEasyController : MonoBehaviour
         {
             train.MoveAway();
             train.State = "LEFT";
+        }
+
+        if (_trains.Any(train => train.PassengerCount != 0))
+        {
+            return;
+        }
+
+        if (GameController.Instance.NbPassengerRemaining == 0)
+        {
+            SceneManager.LoadScene("Scoreboard");
         }
     }
 }

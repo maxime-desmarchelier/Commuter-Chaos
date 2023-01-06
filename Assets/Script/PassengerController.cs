@@ -28,7 +28,11 @@ public class PassengerController : MonoBehaviour
     private void Update(){
         _animator.SetBool(Walking, _navMeshAgent.hasPath);
 
-        if (transform.position.z > 18.45f) Destroy(gameObject);
+        if (transform.position.z > 18.45f)
+        {
+            Destroy(gameObject);
+            GameController.Instance.NbPassengerRemaining--;
+        }
     }
 
     private void OnTriggerEnter(Collider other){

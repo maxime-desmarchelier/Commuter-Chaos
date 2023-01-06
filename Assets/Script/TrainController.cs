@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TrainController : MonoBehaviour
 {
     public string State { get; set; }
     public List<Vector3> PassengerSpawnList { get; set; }
 
+    public List<GameObject> PassengerList { get; set; }
+
     public Vector3 ExitPosition { get; set; }
+    public int PassengerCount { get; set; }
 
     // Start is called before the first frame update
     private void Start(){
@@ -15,6 +20,9 @@ public class TrainController : MonoBehaviour
 
     // Update is called once per frame
     private void Update(){
+    }
+
+    private void Awake(){
     }
 
     private IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy){
@@ -26,7 +34,9 @@ public class TrainController : MonoBehaviour
         }
 
         if (destroy)
+        {
             Destroy(gameObject);
+        }
         else
             State = "STATION";
     }
@@ -43,6 +53,7 @@ public class TrainController : MonoBehaviour
             // Get random element from PassengerSpawnList
             var spawnPosition = PassengerSpawnList[Random.Range(0, PassengerSpawnList.Count)];
             var passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+
             passenger.SetActive(true);
         }
 
