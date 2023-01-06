@@ -42,9 +42,13 @@ public class TrainController : MonoBehaviour
         {
             number--;
             yield return new WaitForSeconds(2f);
-            var passenger = Instantiate(passengerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            // Get random element from PassengerSpawnList
+            Vector3 spawnPosition = PassengerSpawnList[Random.Range(0, PassengerSpawnList.Count)];
+            var passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
             passenger.SetActive(true);
         }
+
+        State = "UNLOADED";
     }
 
     public void UnloadPassengers(GameObject passengerPrefab, int passengerNumber){
