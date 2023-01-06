@@ -37,7 +37,7 @@ public class InspectorController : MonoBehaviour
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             if (!Physics.Raycast(ray, out var hit)) return;
             if (!hit.transform.CompareTag("Passenger")) return;
-            if (Vector3.Distance(transform.position, hit.point) < 5)
+            if (Vector3.Distance(transform.position, hit.point) < 3f)
             {
                 var passenger = hit.transform.gameObject;
                 StartCoroutine(ControlCoroutine(passenger));
@@ -58,7 +58,7 @@ public class InspectorController : MonoBehaviour
         var passengerController = passenger.GetComponent<PassengerController>();
         passengerController.Control(position);
         StartCoroutine(LookAt(passenger.transform.position));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         passengerController.Release();
         _controlInProcess = false;
@@ -66,7 +66,7 @@ public class InspectorController : MonoBehaviour
 
     private IEnumerator LookAt(Vector3 controllerPosition){
         while (Quaternion.Angle(transform.rotation,
-                   Quaternion.LookRotation(controllerPosition - transform.position)) != 0)
+                   Quaternion.LookRotation(controllerPosition - transform.position)) > 10f)
         {
             var transform1 = transform;
             transform.rotation = Quaternion.RotateTowards(transform1.rotation,
