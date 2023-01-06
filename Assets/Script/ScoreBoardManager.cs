@@ -12,7 +12,7 @@ public class ScoreBoardManager : MonoBehaviour
     }
 
     public void Restart(){
-        Debug.Log("Restart");
+        SceneManager.LoadScene(GameController.Instance.Level);
     }
 
     public void Menu(){

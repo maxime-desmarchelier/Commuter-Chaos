@@ -13,7 +13,7 @@ public class LevelEasyController : MonoBehaviour
 
     private void Awake(){
         GameController.Instance.Score = 0;
-        GameController.Instance.Level = "EASY";
+        GameController.Instance.Level = "LEVEL-EASY";
         GameController.Instance.NbPassengerRemaining = 5;
 
         var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, -5.7f), Quaternion.identity);
