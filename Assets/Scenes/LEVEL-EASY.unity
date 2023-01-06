@@ -176,6 +176,23 @@ CapsuleCollider:
   m_Height: 1.5769691
   m_Direction: 1
   m_Center: {x: 0.0028333664, y: 0.6959071, z: 0}
+--- !u!1 &272162613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6082985239921819578, guid: da6fc3d98c2a84874b46efe7dbb650ba, type: 3}
+  m_PrefabInstance: {fileID: 1995187753738403947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &272162615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272162613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c94305fff61f44529ff7fc0713f06f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &435897846 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1328023254706044480, guid: 257c304c754d3b247a51ef5bea7a90d0, type: 3}
@@ -285,6 +302,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1601294742834279351, guid: 6d57d5de1f62f47879ed729bb91fcd01, type: 3}
   m_PrefabInstance: {fileID: 441682147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &522467314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 522467316}
+  - component: {fileID: 522467315}
+  m_Layer: 0
+  m_Name: '[GAME]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &522467315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522467314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc217b23cbdad41bd96a3f04e5e595c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerPrefab: {fileID: 23428739}
+  trainPrefab: {fileID: 272162613}
+--- !u!4 &522467316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522467314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577092693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1810840878227697519, guid: da6fc3d98c2a84874b46efe7dbb650ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.55
+      value: 9.63
       objectReference: {fileID: 0}
     - target: {fileID: 1810840878227697519, guid: da6fc3d98c2a84874b46efe7dbb650ba, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1168,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: YellowTrain
       objectReference: {fileID: 0}
+    - target: {fileID: 6082985239921819578, guid: da6fc3d98c2a84874b46efe7dbb650ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da6fc3d98c2a84874b46efe7dbb650ba, type: 3}
 --- !u!1001 &5290969815834866895
@@ -1180,6 +1247,10 @@ PrefabInstance:
     - target: {fileID: 226528490675681273, guid: 1d8b436cea59943089798d2b7ecf38c0, type: 3}
       propertyPath: m_Name
       value: Passenger
+      objectReference: {fileID: 0}
+    - target: {fileID: 226528490675681273, guid: 1d8b436cea59943089798d2b7ecf38c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 226528490675681273, guid: 1d8b436cea59943089798d2b7ecf38c0, type: 3}
       propertyPath: m_TagString
