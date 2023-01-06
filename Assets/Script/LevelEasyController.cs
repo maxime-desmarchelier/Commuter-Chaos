@@ -32,6 +32,8 @@ public class LevelEasyController : MonoBehaviour
             new(-13.292f, 0, -7.63f)
         };
 
+        trainController.ExitPosition = new Vector3(44f, 1.064f, -5.7f);
+
         _trains.Add(trainController);
     }
 
@@ -41,6 +43,13 @@ public class LevelEasyController : MonoBehaviour
         {
             train.UnloadPassengers(passengerPrefab, 5);
             train.State = "UNLOADING";
+        }
+
+        foreach (var train in _trains.Where(train => train.State == "UNLOADED"))
+        {
+            // If the train is in the station, spawn passengers
+            train.MoveAway();
+            train.State = "LEFT";
         }
     }
 }

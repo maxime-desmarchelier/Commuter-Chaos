@@ -32,6 +32,7 @@ public class TrainController : MonoBehaviour
 
     public string State { get; set; }
     public List<Vector3> PassengerSpawnList { get; set; }
+    public Vector3 ExitPosition { get; set; }
 
     public void MoveToStation(Vector3 stationPosition){
         StartCoroutine(MoveCoroutine(stationPosition, false));
@@ -53,5 +54,9 @@ public class TrainController : MonoBehaviour
 
     public void UnloadPassengers(GameObject passengerPrefab, int passengerNumber){
         StartCoroutine(SpawnPassenger(passengerPrefab, passengerNumber));
+    }
+
+    public void MoveAway(){
+        StartCoroutine(MoveCoroutine(ExitPosition, true));
     }
 }
