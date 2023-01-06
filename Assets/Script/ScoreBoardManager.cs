@@ -3,8 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class ScoreBoardManager : MonoBehaviour
 {
+    private string _nextLevel = null;
+
     // Start is called before the first frame update
     private void Start(){
+        _nextLevel = GameController.Instance.GetNextLevel();
+        if (_nextLevel == null)
+        {
+            GameObject.Find("NEXT").SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -20,6 +27,6 @@ public class ScoreBoardManager : MonoBehaviour
     }
 
     public void Next(){
-        Debug.Log("Next");
+        SceneManager.LoadScene(_nextLevel);
     }
 }
