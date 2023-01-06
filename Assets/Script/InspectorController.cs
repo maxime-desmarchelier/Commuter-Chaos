@@ -1,21 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class InspectorController : MonoBehaviour
 {
+    private static readonly int Walking = Animator.StringToHash("Walking");
+    private Animator _animator;
+
+    private bool _controlInProcess;
     private Camera _mainCamera;
     private NavMeshAgent _navMeshAgent;
-    private Animator _animator;
-    private static readonly int Walking = Animator.StringToHash("Walking");
-
-    private bool _controlInProcess = false;
-
-    // Start is called before the first frame update
-    void Start(){
-    }
 
     private void Awake(){
         _mainCamera = Camera.main;
@@ -23,8 +17,12 @@ public class InspectorController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    // Start is called before the first frame update
+    private void Start(){
+    }
+
     // Update is called once per frame
-    void Update(){
+    private void Update(){
         if (_controlInProcess) return;
 
         _animator.SetBool(Walking, _navMeshAgent.hasPath);
@@ -32,10 +30,7 @@ public class InspectorController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var enter, 1000))
-            {
-                _navMeshAgent.SetDestination(enter.point);
-            }
+            if (Physics.Raycast(ray, out var enter, 1000)) _navMeshAgent.SetDestination(enter.point);
         }
         else if (Input.GetMouseButtonDown(0))
         {
@@ -54,7 +49,7 @@ public class InspectorController : MonoBehaviour
         }
     }
 
-    IEnumerator ControlCoroutine(GameObject passenger){
+    private IEnumerator ControlCoroutine(GameObject passenger){
         _controlInProcess = true;
         var position = transform.position;
         _navMeshAgent.SetDestination(position);
@@ -69,9 +64,9 @@ public class InspectorController : MonoBehaviour
         _controlInProcess = false;
     }
 
-    IEnumerator LookAt(Vector3 controllerPosition){
+    private IEnumerator LookAt(Vector3 controllerPosition){
         while (Quaternion.Angle(transform.rotation,
-                   Quaternion.LookRotation((controllerPosition - transform.position))) != 0)
+                   Quaternion.LookRotation(controllerPosition - transform.position)) != 0)
         {
             var transform1 = transform;
             transform.rotation = Quaternion.RotateTowards(transform1.rotation,

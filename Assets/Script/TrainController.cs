@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class TrainController : MonoBehaviour
 {
+    public string State { get; set; }
+    public List<Vector3> PassengerSpawnList { get; set; }
+
+    public Vector3 ExitPosition { get; set; }
+
     // Start is called before the first frame update
-    void Start(){
+    private void Start(){
     }
 
     // Update is called once per frame
-    void Update(){
+    private void Update(){
     }
 
-    IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy){
+    private IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy){
         State = "MOVING";
         while (Vector3.Distance(transform.position, stationPosition) > 0.1f)
         {
@@ -21,30 +26,22 @@ public class TrainController : MonoBehaviour
         }
 
         if (destroy)
-        {
             Destroy(gameObject);
-        }
         else
-        {
             State = "STATION";
-        }
     }
-
-    public string State { get; set; }
-    public List<Vector3> PassengerSpawnList { get; set; }
-    public Vector3 ExitPosition { get; set; }
 
     public void MoveToStation(Vector3 stationPosition){
         StartCoroutine(MoveCoroutine(stationPosition, false));
     }
 
-    IEnumerator SpawnPassenger(GameObject passengerPrefab, int number){
+    private IEnumerator SpawnPassenger(GameObject passengerPrefab, int number){
         while (number > 0)
         {
             number--;
             yield return new WaitForSeconds(2f);
             // Get random element from PassengerSpawnList
-            Vector3 spawnPosition = PassengerSpawnList[Random.Range(0, PassengerSpawnList.Count)];
+            var spawnPosition = PassengerSpawnList[Random.Range(0, PassengerSpawnList.Count)];
             var passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
             passenger.SetActive(true);
         }

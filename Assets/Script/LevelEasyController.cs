@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class LevelEasyController : MonoBehaviour
@@ -11,14 +8,14 @@ public class LevelEasyController : MonoBehaviour
 
     [SerializeField] private GameObject trainPrefab;
 
-    private List<TrainController> _trains = new();
-
-    // Start is called before the first frame update
-    void Start(){
-    }
+    private readonly List<TrainController> _trains = new();
 
     private void Awake(){
-        GameObject train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, -5.7f), Quaternion.identity);
+        GameController.Instance.Score = 0;
+        GameController.Instance.Level = "EASY";
+
+
+        var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, -5.7f), Quaternion.identity);
         train.SetActive(true);
         var trainController = train.GetComponent<TrainController>();
         trainController.MoveToStation(new Vector3(9.55f, 1.064f, -5.7f));
@@ -37,8 +34,12 @@ public class LevelEasyController : MonoBehaviour
         _trains.Add(trainController);
     }
 
+    // Start is called before the first frame update
+    private void Start(){
+    }
+
     // Update is called once per frame
-    void Update(){
+    private void Update(){
         foreach (var train in _trains.Where(train => train.State == "STATION"))
         {
             train.UnloadPassengers(passengerPrefab, 5);
@@ -47,7 +48,6 @@ public class LevelEasyController : MonoBehaviour
 
         foreach (var train in _trains.Where(train => train.State == "UNLOADED"))
         {
-            // If the train is in the station, spawn passengers
             train.MoveAway();
             train.State = "LEFT";
         }
