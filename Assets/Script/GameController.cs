@@ -8,11 +8,12 @@ namespace Script
         private readonly List<string> _levels = new() { "LEVEL-EASY", "LEVEL-MEDIUM", "LEVEL-HARD" };
         public static GameController Instance { get; private set; }
 
-        public int Score { get; set; }
+        public float Score { get; set; }
         public string Level { get; set; }
 
         public int NbPassengerRemaining { get; set; }
         public int NbFraudster { get; set; }
+        public int NbPassenger { get; set; }
 
         private void Awake(){
             if (Instance != null && Instance != this)

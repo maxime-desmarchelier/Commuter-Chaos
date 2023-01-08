@@ -10,6 +10,7 @@ TagManager:
   - Passenger
   - SpawnPosition
   - DoorPosition
+  - Star
   layers:
   - Default
   - TransparentFX

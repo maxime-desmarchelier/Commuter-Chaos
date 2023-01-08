@@ -73,10 +73,12 @@ namespace Script
             if (Fraudster)
             {
                 GameController.Instance.NbPassengerRemaining--;
+                GameController.Instance.Score += 1;
                 Destroy(gameObject);
             }
             else
             {
+                GameController.Instance.Score -= 0.2f;
                 _navMeshAgent.SetDestination(Exit);
                 _animator.SetBool(Walking, true);
             }

@@ -20,6 +20,7 @@ namespace Script
             GameController.Instance.Level = "LEVEL-EASY";
             GameController.Instance.NbPassengerRemaining = 10;
             GameController.Instance.NbFraudster = 5;
+            GameController.Instance.NbPassenger = 10;
 
             var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, 3.86f), Quaternion.identity);
             train.SetActive(true);
