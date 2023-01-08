@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Script;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class LevelEasyController : MonoBehaviour
 {
@@ -37,18 +39,21 @@ public class LevelEasyController : MonoBehaviour
         _trains.Add(trainController);
     }
 
-    private List<GameObject> GeneratePassengerList(List<Vector3> spawnPositionList, Quaternion passengerRotation,
+    private List<GameObject> GeneratePassengerList(IReadOnlyList<Vector3> spawnPositionList,
+        Quaternion passengerRotation,
         int nbPassenger, int nbFraudster){
         var passengerList = new List<GameObject>();
 
-        for (int i = 0; i < nbPassenger; i++)
+        for (var i = 0; i < nbPassenger; i++)
         {
-            int randomIndex = Random.Range(0, spawnPositionList.Count);
+            var randomIndex = Random.Range(0, spawnPositionList.Count);
             var passenger = Instantiate(passengerPrefab, spawnPositionList[randomIndex], passengerRotation);
             var passengerController = passenger.GetComponent<PassengerController>();
-            passengerController.Fraudster = true;
+            passengerController.Fraudster = i < nbFraudster;
             passengerList.Add(passenger);
         }
+
+        passengerList = passengerList.OrderBy(i => Guid.NewGuid()).ToList();
 
         return passengerList;
     }
@@ -71,8 +76,6 @@ public class LevelEasyController : MonoBehaviour
             train.MoveAway();
             train.State = "LEFT";
         }
-
-        Debug.Log(GameController.Instance.NbPassengerRemaining);
 
         if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
     }
