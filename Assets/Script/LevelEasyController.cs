@@ -34,6 +34,9 @@ namespace Script
                 new(-3.603f, 0, -7.63f),
                 new(-6.491f, 0, -7.63f),
                 new(-13.292f, 0, -7.63f)
+            }, new List<Vector3>
+            {
+                new(0.12f, 2.75f, 18f)
             }, Quaternion.identity, GameController.Instance.NbPassengerRemaining, GameController.Instance.NbFraudster);
 
             trainController.ExitPosition = new Vector3(44f, 1.064f, 3.86f);
@@ -63,16 +66,18 @@ namespace Script
         }
 
         private List<GameObject> GeneratePassengerList(IReadOnlyList<Vector3> spawnPositionList,
+            IReadOnlyList<Vector3> exitPositionList,
             Quaternion passengerRotation,
             int nbPassenger, int nbFraudster){
             var passengerList = new List<GameObject>();
 
             for (var i = 0; i < nbPassenger; i++)
             {
-                var randomIndex = Random.Range(0, spawnPositionList.Count);
-                var passenger = Instantiate(passengerPrefab, spawnPositionList[randomIndex], passengerRotation);
+                var passenger = Instantiate(passengerPrefab,
+                    spawnPositionList[Random.Range(0, spawnPositionList.Count)], passengerRotation);
                 var passengerController = passenger.GetComponent<PassengerController>();
                 passengerController.Fraudster = i < nbFraudster;
+                passengerController.Exit = exitPositionList[Random.Range(0, exitPositionList.Count)];
                 passengerList.Add(passenger);
             }
 

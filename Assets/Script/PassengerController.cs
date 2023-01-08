@@ -11,16 +11,16 @@ namespace Script
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Arrested = Animator.StringToHash("Arrested");
 
-        // TODO CHANGER LA SORTIE CODEE EN DUR
-        private readonly Vector3 _Exit = new(0.12f, 2.75f, 18f);
+
         private Animator _animator;
 
         private NavMeshAgent _navMeshAgent;
         public bool Fraudster { get; set; }
+        public Vector3 Exit { get; set; }
 
         private void Awake(){
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _navMeshAgent.SetDestination(_Exit);
+            _navMeshAgent.SetDestination(Exit);
             _animator = GetComponent<Animator>();
         }
 
@@ -42,7 +42,6 @@ namespace Script
             else if (other.CompareTag("Exit"))
             {
                 Destroy(gameObject);
-                Debug.Log("Passenger escaped");
                 GameController.Instance.NbPassengerRemaining--;
             }
         }
@@ -79,7 +78,7 @@ namespace Script
             }
             else
             {
-                _navMeshAgent.SetDestination(_Exit);
+                _navMeshAgent.SetDestination(Exit);
                 _animator.SetBool(Walking, true);
             }
         }
