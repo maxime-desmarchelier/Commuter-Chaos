@@ -2,7 +2,7 @@
 <br />
 <div>
   <p align="center">
-    <img src="images/logo.png" alt="Logo" width="205" height="134">
+    <img src="Images/logo.png" alt="Logo" width="205" height="134">
   </p>
 
 <h3 align="center">Commuter Chaos : DJV Project</h3>
@@ -32,8 +32,8 @@ If necessary, you can move the camera by moving the mouse to the edge of the scr
 
 ## Screenshots
 
-<img src="images/screenshot_1.png">
-<img src="images/screenshot_3.png">
-<img src="images/screenshot_2.png">
+<img src="Images/screenshot_1.png">
+<img src="Images/screenshot_3.png">
+<img src="Images/screenshot_2.png">
 
 
