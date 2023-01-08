@@ -15,11 +15,16 @@ namespace Script
 
         private NavMeshAgent _navMeshAgent;
         public bool Fraudster { get; set; }
+
         public Vector3 Exit { get; set; }
+
+        // Properties Spedd with 3.5f as default
+        public float Speed { get; set; } = 3.5f;
 
         private void Awake(){
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _navMeshAgent.SetDestination(Exit);
+            _navMeshAgent.speed = Speed;
             _animator = GetComponent<Animator>();
         }
 

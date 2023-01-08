@@ -60,8 +60,6 @@ namespace Script
 
             foreach (var train in _trains.Where(train => train.State == "UNLOADED")) train.MoveAway();
 
-            Debug.Log(GameController.Instance.NbPassengerRemaining);
-
             if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
         }
 
@@ -78,7 +76,7 @@ namespace Script
                 var passengerController = passenger.GetComponent<PassengerController>();
                 passengerController.Fraudster = i < nbFraudster;
                 passengerController.Exit = exitPositionList[Random.Range(0, exitPositionList.Count)];
-                Debug.Log(passengerController.Exit);
+                passengerController.Speed = Random.Range(2f, 7f);
                 passengerList.Add(passenger);
             }
 
