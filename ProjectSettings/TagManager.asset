@@ -9,6 +9,7 @@ TagManager:
   - Tourniquet
   - Passenger
   - SpawnPosition
+  - DoorPosition
   layers:
   - Default
   - TransparentFX

@@ -39,15 +39,9 @@ namespace Script
 
         // Update is called once per frame
         private void Update(){
-            foreach (var train in _trains.Where(train => train.State == "STATION"))
-            {
-                train.UnloadPassengers();
-            }
+            foreach (var train in _trains.Where(train => train.State == "STATION")) train.UnloadPassengers();
 
-            foreach (var train in _trains.Where(train => train.State == "UNLOADED"))
-            {
-                train.MoveAway();
-            }
+            foreach (var train in _trains.Where(train => train.State == "UNLOADED")) train.MoveAway();
 
             if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
         }

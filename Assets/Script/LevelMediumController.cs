@@ -36,15 +36,14 @@ namespace Script
             var passengerList = GeneratePassengerList(exitPositions, Quaternion.identity,
                 GameController.Instance.NbPassengerRemaining, GameController.Instance.NbFraudster);
 
-
             greenTrain.SetActive(true);
-            greenTrainController.MoveToStation(new Vector3(2.98f, 1.30f, 36.24f));
+            greenTrainController.MoveToStation(new Vector3(2.98f, 1.30f, 36.24f), Random.Range(0f, 1.5f));
 
             yellowTrain.SetActive(true);
-            yellowTrainController.MoveToStation(new Vector3(7.9f, 1.30f, -4.335f));
+            yellowTrainController.MoveToStation(new Vector3(7.9f, 1.30f, -4.335f), Random.Range(0f, 1.5f));
 
             // On ajoute les passagers au train
-            int rand = Random.Range(0, passengerList.Count);
+            var rand = Random.Range(0, passengerList.Count);
             greenTrainController.PassengerList = passengerList.GetRange(0, rand);
             passengerList.RemoveRange(0, rand);
             yellowTrainController.PassengerList = passengerList;
@@ -57,15 +56,9 @@ namespace Script
 
         // Update is called once per frame
         private void Update(){
-            foreach (var train in _trains.Where(train => train.State == "STATION"))
-            {
-                train.UnloadPassengers();
-            }
+            foreach (var train in _trains.Where(train => train.State == "STATION")) train.UnloadPassengers();
 
-            foreach (var train in _trains.Where(train => train.State == "UNLOADED"))
-            {
-                train.MoveAway();
-            }
+            foreach (var train in _trains.Where(train => train.State == "UNLOADED")) train.MoveAway();
 
             Debug.Log(GameController.Instance.NbPassengerRemaining);
 

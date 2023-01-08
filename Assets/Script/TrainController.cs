@@ -11,7 +11,8 @@ namespace Script
         public List<GameObject> PassengerList { get; set; }
         public Vector3 ExitPosition { get; set; }
 
-        private IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy){
+        private IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy, float delay){
+            yield return new WaitForSeconds(delay);
             State = "MOVING";
             while (Vector3.Distance(transform.position, stationPosition) > 0.1f)
             {
@@ -25,8 +26,8 @@ namespace Script
                 State = "STATION";
         }
 
-        public void MoveToStation(Vector3 stationPosition){
-            StartCoroutine(MoveCoroutine(stationPosition, false));
+        public void MoveToStation(Vector3 stationPosition, float delay = 0f){
+            StartCoroutine(MoveCoroutine(stationPosition, false, delay));
         }
 
 
@@ -59,7 +60,7 @@ namespace Script
         }
 
         public void MoveAway(){
-            StartCoroutine(MoveCoroutine(ExitPosition, true));
+            StartCoroutine(MoveCoroutine(ExitPosition, true, 0));
             State = "LEFT";
         }
     }
