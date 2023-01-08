@@ -26,40 +26,30 @@ namespace Script
             var trainController = train.GetComponent<TrainController>();
             trainController.MoveToStation(new Vector3(5f, 1.064f, 3.86f));
 
-            trainController.PassengerList = GeneratePassengerList(new List<Vector3>
-            {
-                new(12.87f, 0, -7.63f),
-                new(6.08f, 0, -7.63f),
-                new(3.2f, 0, -7.63f),
-                new(-3.603f, 0, -7.63f),
-                new(-6.491f, 0, -7.63f),
-                new(-13.292f, 0, -7.63f)
-            }, new List<Vector3>
-            {
-                new(0.12f, 2.75f, 18f)
-            }, Quaternion.identity, GameController.Instance.NbPassengerRemaining, GameController.Instance.NbFraudster);
+            var objList = GameObject.FindGameObjectsWithTag("SpawnPosition");
+            var spawnPositions = objList.Select(obj => obj.transform.position).ToList();
+
+            objList = GameObject.FindGameObjectsWithTag("Exit");
+            var exitPositions = objList.Select(obj => obj.transform.position).ToList();
+
+            trainController.PassengerList = GeneratePassengerList(spawnPositions,
+                exitPositions, Quaternion.identity, GameController.Instance.NbPassengerRemaining,
+                GameController.Instance.NbFraudster);
 
             trainController.ExitPosition = new Vector3(44f, 1.064f, 3.86f);
             _trains.Add(trainController);
-        }
-
-        // Start is called before the first frame update
-        private void Start(){
         }
 
         // Update is called once per frame
         private void Update(){
             foreach (var train in _trains.Where(train => train.State == "STATION"))
             {
-                train.UnloadPassengers(passengerPrefab, GameController.Instance.NbPassengerRemaining,
-                    GameController.Instance.NbFraudster);
-                train.State = "UNLOADING";
+                train.UnloadPassengers();
             }
 
             foreach (var train in _trains.Where(train => train.State == "UNLOADED"))
             {
                 train.MoveAway();
-                train.State = "LEFT";
             }
 
             if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
@@ -81,7 +71,7 @@ namespace Script
                 passengerList.Add(passenger);
             }
 
-            passengerList = passengerList.OrderBy(i => Guid.NewGuid()).ToList();
+            passengerList = passengerList.OrderBy(_ => Guid.NewGuid()).ToList();
 
             return passengerList;
         }

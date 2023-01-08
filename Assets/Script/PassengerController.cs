@@ -20,6 +20,7 @@ namespace Script
 
         private void Awake(){
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            Debug.Log(Exit);
             _navMeshAgent.SetDestination(Exit);
             _animator = GetComponent<Animator>();
         }

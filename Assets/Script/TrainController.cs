@@ -10,17 +10,6 @@ namespace Script
         public List<GameObject> PassengerList { get; set; }
         public Vector3 ExitPosition { get; set; }
 
-        private void Awake(){
-        }
-
-        // Start is called before the first frame update
-        private void Start(){
-        }
-
-        // Update is called once per frame
-        private void Update(){
-        }
-
         private IEnumerator MoveCoroutine(Vector3 stationPosition, bool destroy){
             State = "MOVING";
             while (Vector3.Distance(transform.position, stationPosition) > 0.1f)
@@ -39,7 +28,7 @@ namespace Script
             StartCoroutine(MoveCoroutine(stationPosition, false));
         }
 
-        private IEnumerator SpawnPassenger(GameObject passengerPrefab, int nbPassengerRemaining, int fraudsterNumber){
+        private IEnumerator SpawnPassenger(){
             foreach (var passenger in PassengerList)
             {
                 passenger.SetActive(true);
@@ -49,12 +38,14 @@ namespace Script
             State = "UNLOADED";
         }
 
-        public void UnloadPassengers(GameObject passengerPrefab, int nbPassengerRemaining, int fraudsterNumber){
-            StartCoroutine(SpawnPassenger(passengerPrefab, nbPassengerRemaining, fraudsterNumber));
+        public void UnloadPassengers(){
+            StartCoroutine(SpawnPassenger());
+            State = "UNLOADING";
         }
 
         public void MoveAway(){
             StartCoroutine(MoveCoroutine(ExitPosition, true));
+            State = "LEFT";
         }
     }
 }

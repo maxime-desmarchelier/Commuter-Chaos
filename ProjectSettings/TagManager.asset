@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Tourniquet
   - Passenger
+  - SpawnPosition
   layers:
   - Default
   - TransparentFX
