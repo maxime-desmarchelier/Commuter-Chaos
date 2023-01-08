@@ -31,7 +31,7 @@ namespace Script
 
 
         private IEnumerator SpawnPassenger(){
-            var spawnPositions = FindGameObjectsWithTagInChildren(gameObject, "SpawnPosition");
+            var spawnPositions = FindGameObjectsWithTagInChildren(gameObject, "DoorPosition");
             foreach (var passenger in PassengerList)
             {
                 var rand = Random.Range(0, spawnPositions.Count);

@@ -11,7 +11,6 @@ namespace Script
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Arrested = Animator.StringToHash("Arrested");
 
-
         private Animator _animator;
 
         private NavMeshAgent _navMeshAgent;
@@ -20,7 +19,6 @@ namespace Script
 
         private void Awake(){
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            Debug.Log(Exit);
             _navMeshAgent.SetDestination(Exit);
             _animator = GetComponent<Animator>();
         }
