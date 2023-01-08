@@ -15,11 +15,12 @@ public class LevelEasyController : MonoBehaviour
         GameController.Instance.Score = 0;
         GameController.Instance.Level = "LEVEL-EASY";
         GameController.Instance.NbPassengerRemaining = 5;
+        GameController.Instance.NbFraudster = 3;
 
-        var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, -5.7f), Quaternion.identity);
+        var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, 3.86f), Quaternion.identity);
         train.SetActive(true);
         var trainController = train.GetComponent<TrainController>();
-        trainController.MoveToStation(new Vector3(9.55f, 1.064f, -5.7f));
+        trainController.MoveToStation(new Vector3(5f, 1.064f, 3.86f));
         trainController.PassengerSpawnList = new List<Vector3>
         {
             new(12.87f, 0, -7.63f),
@@ -30,7 +31,7 @@ public class LevelEasyController : MonoBehaviour
             new(-13.292f, 0, -7.63f)
         };
 
-        trainController.ExitPosition = new Vector3(44f, 1.064f, -5.7f);
+        trainController.ExitPosition = new Vector3(44f, 1.064f, 3.86f);
         _trains.Add(trainController);
     }
 
@@ -42,7 +43,8 @@ public class LevelEasyController : MonoBehaviour
     private void Update(){
         foreach (var train in _trains.Where(train => train.State == "STATION"))
         {
-            train.UnloadPassengers(passengerPrefab, 5);
+            train.UnloadPassengers(passengerPrefab, GameController.Instance.NbPassengerRemaining,
+                GameController.Instance.NbFraudster);
             train.State = "UNLOADING";
         }
 
@@ -52,14 +54,8 @@ public class LevelEasyController : MonoBehaviour
             train.State = "LEFT";
         }
 
-        if (_trains.Any(train => train.PassengerCount != 0))
-        {
-            return;
-        }
+        if (_trains.Any(train => train.PassengerCount != 0)) return;
 
-        if (GameController.Instance.NbPassengerRemaining == 0)
-        {
-            SceneManager.LoadScene("Scoreboard");
-        }
+        if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
     }
 }

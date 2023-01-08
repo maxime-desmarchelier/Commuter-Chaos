@@ -7,13 +7,14 @@ public class PassengerController : MonoBehaviour
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Badge = Animator.StringToHash("Badge");
     private static readonly int Jump = Animator.StringToHash("Jump");
+    private static readonly int Arrested = Animator.StringToHash("Arrested");
+
+    // TODO CHANGER LA SORTIE CODEE EN DUR
+    private readonly Vector3 _Exit = new(0.12f, 2.75f, 18f);
     private Animator _animator;
 
-    private readonly Vector3 _Exit = new(0.12f, 2.75f, 18f);
-
-    private readonly bool _isFraudster = true;
     private NavMeshAgent _navMeshAgent;
-    private static readonly int Arrested = Animator.StringToHash("Arrested");
+    public bool Fraudster { get; set; }
 
     private void Awake(){
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -28,17 +29,13 @@ public class PassengerController : MonoBehaviour
     // Update is called once per frame
     private void Update(){
         _animator.SetBool(Walking, _navMeshAgent.hasPath);
-
-        if (!(transform.position.z > _Exit.z - 0.5f)) return;
-        Destroy(gameObject);
-        GameController.Instance.NbPassengerRemaining--;
     }
 
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Tourniquet"))
         {
             _navMeshAgent.speed = 1.5f;
-            _animator.SetTrigger(!_isFraudster ? Badge : Jump);
+            _animator.SetTrigger(!Fraudster ? Badge : Jump);
         }
     }
 
@@ -50,7 +47,7 @@ public class PassengerController : MonoBehaviour
         _navMeshAgent.SetDestination(transform.position);
         StartCoroutine(LookAt(controller));
         _animator.SetBool(Walking, false);
-        if (_isFraudster)
+        if (Fraudster)
             _animator.SetTrigger(Arrested);
     }
 
@@ -67,7 +64,7 @@ public class PassengerController : MonoBehaviour
     }
 
     public void Release(){
-        if (_isFraudster)
+        if (Fraudster)
         {
             GameController.Instance.NbPassengerRemaining--;
             Destroy(gameObject);
