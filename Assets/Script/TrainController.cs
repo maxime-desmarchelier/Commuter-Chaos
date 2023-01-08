@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Script
@@ -28,14 +29,28 @@ namespace Script
             StartCoroutine(MoveCoroutine(stationPosition, false));
         }
 
+
         private IEnumerator SpawnPassenger(){
+            var spawnPositions = FindGameObjectsWithTagInChildren(gameObject, "SpawnPosition");
             foreach (var passenger in PassengerList)
             {
+                var rand = Random.Range(0, spawnPositions.Count);
+                passenger.transform.position = spawnPositions[rand].position;
+                passenger.transform.rotation = spawnPositions[rand].rotation;
+
                 passenger.SetActive(true);
                 yield return new WaitForSeconds(2f);
             }
 
             State = "UNLOADED";
+        }
+
+        private List<(Vector3 position, Quaternion rotation)> FindGameObjectsWithTagInChildren(GameObject go,
+            string stringTag){
+            return (from Transform child in go.transform
+                    where child.gameObject.CompareTag(stringTag)
+                    select (child.position, child.rotation))
+                .ToList();
         }
 
         public void UnloadPassengers(){

@@ -26,14 +26,11 @@ namespace Script
             var trainController = train.GetComponent<TrainController>();
             trainController.MoveToStation(new Vector3(5f, 1.064f, 3.86f));
 
-            var objList = GameObject.FindGameObjectsWithTag("SpawnPosition");
-            var spawnPositions = objList.Select(obj => obj.transform.position).ToList();
-
-            objList = GameObject.FindGameObjectsWithTag("Exit");
+            var objList = GameObject.FindGameObjectsWithTag("Exit");
             var exitPositions = objList.Select(obj => obj.transform.position).ToList();
 
-            trainController.PassengerList = GeneratePassengerList(spawnPositions,
-                exitPositions, Quaternion.identity, GameController.Instance.NbPassengerRemaining,
+            trainController.PassengerList = GeneratePassengerList(exitPositions, Quaternion.identity,
+                GameController.Instance.NbPassengerRemaining,
                 GameController.Instance.NbFraudster);
 
             trainController.ExitPosition = new Vector3(44f, 1.064f, 3.86f);
@@ -55,7 +52,8 @@ namespace Script
             if (GameController.Instance.NbPassengerRemaining == 0) SceneManager.LoadScene("Scoreboard");
         }
 
-        private List<GameObject> GeneratePassengerList(IReadOnlyList<Vector3> spawnPositionList,
+
+        private List<GameObject> GeneratePassengerList(
             IReadOnlyList<Vector3> exitPositionList,
             Quaternion passengerRotation,
             int nbPassenger, int nbFraudster){
@@ -64,7 +62,7 @@ namespace Script
             for (var i = 0; i < nbPassenger; i++)
             {
                 var passenger = Instantiate(passengerPrefab,
-                    spawnPositionList[Random.Range(0, spawnPositionList.Count)], passengerRotation);
+                    new Vector3(0, 0, 0), Quaternion.identity);
                 var passengerController = passenger.GetComponent<PassengerController>();
                 passengerController.Fraudster = i < nbFraudster;
                 passengerController.Exit = exitPositionList[Random.Range(0, exitPositionList.Count)];
