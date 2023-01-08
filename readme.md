@@ -24,6 +24,12 @@ The controller is moved using the right mouse click.
 A ticket check is performed with the left mouse click. 
 
 If necessary, you can move the camera by moving the mouse to the edge of the screen.
+
+## WebGL Build 
+
+https://purple-desert-0c9cb9603.2.azurestaticapps.net/
+
+
 ## Built With
 
 * [Unity](https://unity.com/fr)
