@@ -19,26 +19,25 @@ namespace Script
             _animator = GetComponent<Animator>();
         }
 
-        // Start is called before the first frame update
-        private void Start(){
-        }
-
-        // Update is called once per frame
         private void Update(){
+            // Si un contrôle est en cours, on ne fait rien 
             if (_controlInProcess) return;
 
             _animator.SetBool(Walking, _navMeshAgent.hasPath);
 
             if (Input.GetMouseButtonDown(1))
             {
+                // On déplace le contrôleur vers le point cliqué
                 var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var enter, 1000)) _navMeshAgent.SetDestination(enter.point);
             }
             else if (Input.GetMouseButtonDown(0))
             {
+                // On déplace le contrôleur vers le point cliqué
                 var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out var hit)) return;
                 if (!hit.transform.CompareTag("Passenger")) return;
+                // Si on a cliqué sur un passager, on le contrôle
                 if (Vector3.Distance(transform.position, hit.point) < 3f)
                 {
                     var passenger = hit.transform.gameObject;
@@ -59,9 +58,11 @@ namespace Script
 
             var passengerController = passenger.GetComponent<PassengerController>();
             passengerController.Control(position);
+            // On tourne le controleur vers le passager
             StartCoroutine(LookAt(passenger.transform.position));
+            // On simule une durée de contrôle
             yield return new WaitForSeconds(1f);
-
+            // On libère le passager
             passengerController.Release();
             _controlInProcess = false;
         }

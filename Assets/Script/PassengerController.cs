@@ -18,7 +18,6 @@ namespace Script
 
         public Vector3 Exit { get; set; }
 
-        // Properties Spedd with 3.5f as default
         public float Speed { get; set; } = 3.5f;
 
         private void Awake(){
@@ -28,11 +27,6 @@ namespace Script
             _animator = GetComponent<Animator>();
         }
 
-        // Start is called before the first frame update
-        private void Start(){
-        }
-
-        // Update is called once per frame
         private void Update(){
             _animator.SetBool(Walking, _navMeshAgent.hasPath);
         }

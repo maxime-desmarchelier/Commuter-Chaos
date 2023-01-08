@@ -16,21 +16,26 @@ namespace Script
         private readonly List<TrainController> _trains = new();
 
         private void Awake(){
+            // On réinitialise les variables de la scène précédente
             GameController.Instance.Score = 0;
             GameController.Instance.Level = "LEVEL-EASY";
+
+            // On définit le nombre de passager et de fraudeur
             GameController.Instance.NbPassengerRemaining = 10;
             GameController.Instance.NbFraudster = 5;
-            GameController.Instance.NbPassenger = 10;
 
+            // On créee le train
             var train = Instantiate(trainPrefab, new Vector3(-22.95f, 1.064f, 3.86f), Quaternion.identity);
             train.SetActive(true);
             var trainController = train.GetComponent<TrainController>();
+
+            // On fait bouger le train vers la station
             trainController.MoveToStation(new Vector3(5f, 1.064f, 3.86f));
 
             var objList = GameObject.FindGameObjectsWithTag("Exit");
             var exitPositions = objList.Select(obj => obj.transform.position).ToList();
 
-            trainController.PassengerList = GeneratePassengerList(exitPositions, Quaternion.identity,
+            trainController.PassengerList = GeneratePassengerList(exitPositions,
                 GameController.Instance.NbPassengerRemaining,
                 GameController.Instance.NbFraudster);
 
@@ -50,7 +55,6 @@ namespace Script
 
         private List<GameObject> GeneratePassengerList(
             IReadOnlyList<Vector3> exitPositionList,
-            Quaternion passengerRotation,
             int nbPassenger, int nbFraudster){
             var passengerList = new List<GameObject>();
 

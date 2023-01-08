@@ -10,11 +10,6 @@ namespace Script
             _mainCamera = Camera.main;
         }
 
-        // Start is called before the first frame update
-        private void Start(){
-        }
-
-        // Update is called once per frame
         private void Update(){
             if (Input.mousePosition.x >= Screen.width - 1)
                 _mainCamera.transform.Translate(Vector3.right * (Time.deltaTime * 10));
