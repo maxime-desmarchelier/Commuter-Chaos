@@ -36,6 +36,22 @@ https://purple-desert-0c9cb9603.2.azurestaticapps.net/
 * [Blender](https://www.blender.org/)
 * [Sketchup](https://www.sketchup.com/fr)
 
+## Improvement
+
+* Ambient lighting, using small low-emission lamps rather than overall lighting.
+
+* Add levels based on subway stations from around the world (http://estacions.albertguillaumes.cat/)
+
+* Add automatic gates (https://3dwarehouse.sketchup.com/model/4afbd8b88704b0af995425f067333fd3/portique-dentr%C3%A9esortie-2?hl=de)
+
+* Add AI that automatically controls passengers in the case of a station with multiple exits, as well as the ability to take control of this character.
+
+* Addition of cinematics:
+
+  * Zoom in during a ticket check with an animation of the passenger showing their ticket and the controller issuing a fine
+
+  * Zoom out from the arriving train to the game camera's position at the start of the game
+
 ## Screenshots
 
 <img src="Images/screenshot_1.png">
